@@ -379,6 +379,163 @@
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--line); }
 
+  /* ─── ZOHO-INSPIRED ANIMATIONS ─── */
+
+  /* Page loader */
+  #zoho-loader {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #zoho-loader.hide { opacity: 0; visibility: hidden; }
+  .loader-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; color: #E8523A; letter-spacing: 0.02em;
+    animation: zPulse 1s ease infinite;
+  }
+  .loader-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: #aaa; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .loader-bar {
+    width: 200px; height: 3px;
+    background: #eee; border-radius: 2px; overflow: hidden;
+  }
+  .loader-bar-fill {
+    height: 100%; width: 0%;
+    background: #E8523A;
+    border-radius: 2px;
+    animation: loaderFill 1.4s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  @keyframes loaderFill { from { width: 0%; } to { width: 100%; } }
+  @keyframes zPulse { 0%,100%{opacity:1} 50%{opacity:0.55} }
+
+  /* Scroll progress bar */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 9998;
+    height: 3px; width: 0%;
+    background: #E8523A;
+    transition: width 0.1s linear;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(36px);
+    transition: opacity 0.75s cubic-bezier(.22,.68,0,1.1), transform 0.75s cubic-bezier(.22,.68,0,1.1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+  .delay-5 { transition-delay: 0.5s; }
+
+  /* Hero entrance */
+  .hero-label { opacity: 0; animation: fadeSlideUp 0.6s ease 0.4s forwards; }
+  .hero-name   { opacity: 0; animation: fadeSlideUp 0.7s ease 0.6s forwards; }
+  .hero-title  { opacity: 0; animation: fadeSlideUp 0.7s ease 0.8s forwards; }
+  .hero-cta    { opacity: 0; animation: fadeSlideUp 0.7s ease 1.0s forwards; }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stat blocks stagger in */
+  .stat-block { opacity: 0; animation: fadeSlideUp 0.6s ease forwards; }
+  .stat-block:nth-child(1) { animation-delay: 0.8s; }
+  .stat-block:nth-child(2) { animation-delay: 1.0s; }
+  .stat-block:nth-child(3) { animation-delay: 1.2s; }
+  .stat-block:nth-child(4) { animation-delay: 1.4s; }
+  .stat-num { transition: transform 0.2s ease; }
+  .stat-block:hover .stat-num { transform: scale(1.08); }
+
+  /* Nav underline */
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: #E8523A;
+    transition: width 0.25s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Skill card hover */
+  .skill-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .skill-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(232,82,58,0.14); }
+  .skill-card-icon { transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), background 0.3s; }
+  .skill-card:hover .skill-card-icon { transform: rotate(10deg) scale(1.2); background: #E8523A; }
+  .skill-tag { transition: border-color 0.2s, color 0.2s; cursor: default; }
+  .skill-tag:hover { border-color: #E8523A; color: #E8523A; }
+
+  /* Exp project hover */
+  .exp-project { transition: border-color 0.25s, transform 0.25s; }
+  .exp-project:hover { border-color: #E8523A; transform: translateX(5px); }
+
+  /* Exp panel fade */
+  .exp-panel.active { animation: panelIn 0.4s ease; }
+  @keyframes panelIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  /* Exp company tab */
+  .exp-company { transition: padding-left 0.2s; }
+  .exp-company:not(.active):hover { padding-left: 8px; }
+
+  /* Domain card */
+  .domain-card { transition: background 0.25s; }
+  .domain-card:hover { background: #fff8f6; }
+  .domain-icon { transition: transform 0.35s cubic-bezier(.34,1.56,.64,1); }
+  .domain-card:hover .domain-icon { transform: scale(1.35) rotate(-6deg); }
+
+  /* Contact item */
+  .contact-item { transition: transform 0.2s; }
+  .contact-item:hover { transform: translateX(8px); }
+
+  /* Hero right glow */
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-right::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(232,82,58,0.07) 0%, transparent 70%);
+    animation: floatOrb 7s ease-in-out infinite; pointer-events: none;
+  }
+  @keyframes floatOrb {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-24px, 24px) scale(1.12); }
+  }
+
+  /* Cursor */
+  #cursor-dot {
+    width: 8px; height: 8px; background: #E8523A; border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9997;
+    transform: translate(-50%,-50%);
+    transition: width 0.15s, height 0.15s;
+  }
+  #cursor-ring {
+    width: 34px; height: 34px;
+    border: 1.5px solid rgba(232,82,58,0.45); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9996;
+    transform: translate(-50%,-50%);
+    transition: left 0.12s ease, top 0.12s ease, width 0.2s, height 0.2s;
+  }
+  body:hover #cursor-dot { opacity: 1; }
+
+  /* Marquee dot pulse */
+  .marquee-dot { animation: dotPulse 2s ease-in-out infinite; }
+  @keyframes dotPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.6)} }
+
+  /* Section header line draw */
+  .section-header { position: relative; }
+  .section-header::after {
+    content: ''; position: absolute; bottom: -1px; left: 0;
+    width: 0; height: 2px; background: #E8523A;
+    transition: width 0.5s ease;
+  }
+  .section-header.visible::after { width: 60px; }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
@@ -399,9 +556,130 @@
     footer { padding: 20px 24px; }
     .marquee-header { padding: 48px 24px 32px; }
   }
+
+  /* ─── ZOHO LOGO ANIMATION ─── */
+  .zoho-logo-anim {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 32px;
+  }
+  .zoho-squares {
+    display: flex; align-items: center;
+    position: relative; width: 88px; height: 44px;
+  }
+  .zsq {
+    position: absolute;
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    border: 4px solid transparent;
+    animation: zspin 3s ease-in-out infinite;
+  }
+  .zsq-1 { border-color: #E8523A; left: 0px;  animation-delay: 0s;    transform-origin: center; }
+  .zsq-2 { border-color: #3DA64A; left: 16px; animation-delay: 0.15s; transform-origin: center; }
+  .zsq-3 { border-color: #2B6CB0; left: 32px; animation-delay: 0.3s;  transform-origin: center; }
+  .zsq-4 { border-color: #E8A020; left: 48px; animation-delay: 0.45s; transform-origin: center; }
+
+  @keyframes zspin {
+    0%   { transform: rotate(0deg) scale(1); }
+    20%  { transform: rotate(-15deg) scale(1.08); }
+    50%  { transform: rotate(12deg) scale(0.95); }
+    75%  { transform: rotate(-8deg) scale(1.04); }
+    100% { transform: rotate(0deg) scale(1); }
+  }
+
+  .zoho-wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.25em; color: var(--muted);
+    text-transform: uppercase;
+  }
+  .zoho-wordmark span { color: var(--accent); }
+
+  /* Hero Zoho badge floating animation */
+  .zoho-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: white;
+    border: 1px solid var(--line);
+    padding: 10px 16px;
+    margin-bottom: 28px;
+    animation: fadeSlideUp 0.6s ease 0.3s forwards, badgeFloat 4s ease-in-out 1.5s infinite;
+    opacity: 0;
+  }
+  @keyframes badgeFloat {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-5px); }
+  }
+  .badge-squares {
+    display: flex; gap: 3px; align-items: center;
+  }
+  .bsq {
+    width: 10px; height: 10px; border-radius: 2px;
+    border: 2.5px solid transparent;
+    animation: bspin 2.5s ease-in-out infinite;
+  }
+  .bsq-1 { border-color: #E8523A; animation-delay: 0s; }
+  .bsq-2 { border-color: #3DA64A; animation-delay: 0.1s; }
+  .bsq-3 { border-color: #2B6CB0; animation-delay: 0.2s; }
+  .bsq-4 { border-color: #E8A020; animation-delay: 0.3s; }
+  @keyframes bspin {
+    0%,100% { transform: rotate(0deg); }
+    50%      { transform: rotate(20deg) scale(1.1); }
+  }
+  .badge-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--muted); letter-spacing: 0.08em;
+  }
+  .badge-text strong { color: var(--accent); font-weight: 600; }
+
+  /* Big Zoho animation in hero-right top area */
+  .zoho-hero-visual {
+    display: flex; justify-content: flex-end;
+    padding-bottom: 24px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .zoho-big-squares {
+    position: relative; width: 120px; height: 60px;
+    animation: fadeSlideUp 0.8s ease 0.6s both;
+  }
+  .zbig {
+    position: absolute;
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    border: 5px solid transparent;
+    top: 6px;
+    animation: zbigSpin 4s ease-in-out infinite;
+  }
+  .zbig-1 { border-color: #E8523A; left: 0px;  animation-delay: 0s;    }
+  .zbig-2 { border-color: #3DA64A; left: 22px; animation-delay: 0.2s;  }
+  .zbig-3 { border-color: #2B6CB0; left: 44px; animation-delay: 0.4s;  }
+  .zbig-4 { border-color: #E8A020; left: 66px; animation-delay: 0.6s;  }
+  @keyframes zbigSpin {
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(-18deg) scale(1.1); }
+    50%  { transform: rotate(14deg) scale(0.92); }
+    75%  { transform: rotate(-10deg) scale(1.05); }
+    100% { transform: rotate(0deg); }
+  }
+  .zoho-big-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; color: var(--muted);
+    text-align: right; margin-top: 6px;
+    text-transform: uppercase;
+  }
+
 </style>
 </head>
 <body>
+
+<!-- ZOHO LOADER -->
+<div id="zoho-loader">
+  <div class="loader-logo">Sunil Kumar</div>
+  <div class="loader-tagline">Zoho Developer &middot; Portfolio</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+<div id="progress-bar"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
 <!-- NAV -->
 <nav>
@@ -417,7 +695,16 @@
 <!-- HERO -->
 <section class="hero" style="padding: 0;">
   <div class="hero-left">
-    <p class="hero-label">// Zoho Developer · 3+ Years</p>
+    <!-- Zoho animated badge -->
+    <div class="zoho-badge">
+      <div class="badge-squares">
+        <div class="bsq bsq-1"></div>
+        <div class="bsq bsq-2"></div>
+        <div class="bsq bsq-3"></div>
+        <div class="bsq bsq-4"></div>
+      </div>
+      <span class="badge-text"><strong>Zoho</strong> Certified Developer · 3+ Years</span>
+    </div>
     <h1 class="hero-name">Sunil<br><em>Kumar</em></h1>
     <p class="hero-title">End-to-end Zoho ecosystem specialist — turning complex business workflows into elegant, automated solutions.</p>
     <div class="hero-cta">
@@ -426,6 +713,18 @@
     </div>
   </div>
   <div class="hero-right">
+    <!-- Zoho logo animation -->
+    <div class="zoho-hero-visual">
+      <div>
+        <div class="zoho-big-squares">
+          <div class="zbig zbig-1"></div>
+          <div class="zbig zbig-2"></div>
+          <div class="zbig zbig-3"></div>
+          <div class="zbig zbig-4"></div>
+        </div>
+        <div class="zoho-big-label">Z · O · H · O</div>
+      </div>
+    </div>
     <div class="stat-block">
       <div class="stat-num">3<span>+</span></div>
       <div class="stat-label">Years of Zoho Development</div>
@@ -478,12 +777,12 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-header">
+  <div class="section-header reveal">
     <span class="section-num">01</span>
     <h2 class="section-title">Technical Arsenal</h2>
   </div>
   <div class="skills-grid">
-    <div class="skill-card">
+    <div class="skill-card reveal delay-1">
       <div class="skill-card-icon">Z</div>
       <h3>Zoho Platform</h3>
       <p class="skill-desc">Deep expertise across the full Zoho product suite — from CRM customization to Creator app development.</p>
@@ -500,7 +799,7 @@
         <span class="skill-tag">Zoho Subscriptions</span>
       </div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card reveal delay-2">
       <div class="skill-card-icon">&lt;/&gt;</div>
       <h3>Development</h3>
       <p class="skill-desc">Expert Deluge scripting for automation, plus Python and web technologies for full-stack capability.</p>
@@ -513,7 +812,7 @@
         <span class="skill-tag">REST APIs</span>
       </div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card reveal delay-3">
       <div class="skill-card-icon">⇌</div>
       <h3>Integrations</h3>
       <p class="skill-desc">Seamless third-party integrations bridging Zoho with communication platforms, IoT, and external systems.</p>
@@ -531,11 +830,11 @@
 
 <!-- EXPERIENCE -->
 <section id="experience" style="background: var(--bg);">
-  <div class="section-header">
+  <div class="section-header reveal">
     <span class="section-num">02</span>
     <h2 class="section-title">Experience</h2>
   </div>
-  <div class="exp-grid">
+  <div class="exp-grid reveal">
     <div class="exp-sidebar">
       <div class="exp-company active" onclick="showExp('barsana')">
         <div class="exp-company-name">Shri Barsana E-Vehicles</div>
@@ -658,33 +957,33 @@
 
 <!-- DOMAINS -->
 <section id="domains" style="padding-top: 100px; padding-bottom: 0;">
-  <div class="section-header">
+  <div class="section-header reveal">
     <span class="section-num">03</span>
     <h2 class="section-title">Industry Domains</h2>
   </div>
 </section>
 <div class="domains-grid">
-  <div class="domain-card">
+  <div class="domain-card reveal delay-1">
     <span class="domain-icon">⚙</span>
     <div class="domain-name">Manufacturing</div>
     <div class="domain-note">EV, Consumer Goods</div>
   </div>
-  <div class="domain-card">
+  <div class="domain-card reveal delay-2">
     <span class="domain-icon">✦</span>
     <div class="domain-name">NGO & Education</div>
     <div class="domain-note">Event & Admission Mgmt</div>
   </div>
-  <div class="domain-card">
+  <div class="domain-card reveal delay-3">
     <span class="domain-icon">⊕</span>
     <div class="domain-name">Logistics</div>
     <div class="domain-note">Last-mile Delivery</div>
   </div>
-  <div class="domain-card">
+  <div class="domain-card reveal delay-4">
     <span class="domain-icon">◈</span>
     <div class="domain-name">Finance & Insurance</div>
     <div class="domain-note">Loans, Claims, Sales</div>
   </div>
-  <div class="domain-card">
+  <div class="domain-card reveal delay-5">
     <span class="domain-icon">⬡</span>
     <div class="domain-name">IoT & Analytics</div>
     <div class="domain-note">Sensor Data, Dashboards</div>
@@ -709,19 +1008,19 @@
 
 <!-- CONTACT -->
 <section id="contact" style="padding: 0;">
-  <div class="contact-left">
+  <div class="contact-left reveal-left">
     <div style="font-family:'DM Mono',monospace; font-size:12px; color:var(--muted); margin-bottom:16px; letter-spacing:0.1em;">04 / Contact</div>
     <h2 class="section-title" style="font-family:'DM Serif Display',serif; font-size:52px; color:var(--bg); line-height:1.1;">Let's build<br><em style="color:var(--accent2);">something.</em></h2>
     <p style="color:var(--muted); font-size:15px; margin-top:24px; line-height:1.7; max-width:340px;">Available for new projects and collaborations across India and internationally. Let's discuss what you need.</p>
   </div>
-  <div class="contact-right">
+  <div class="contact-right reveal-right">
     <div class="contact-item">
       <span class="contact-label">Phone</span>
       <a href="tel:8109665900" class="contact-value">+91 8109665900</a>
     </div>
     <div class="contact-item">
       <span class="contact-label">Email</span>
-      <a href="mailto:sunilgehlot703@gmail.com" class="contact-value">sunilgehlot703@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#9be8eef5f2f7fcfef3f7f4efacaba8dbfcf6faf2f7b5f8f4f6" class="contact-value"><span class="__cf_email__" data-cfemail="bccfc9d2d5d0dbd9d4d0d3c88b8c8ffcdbd1ddd5d092dfd3d1">[email&#160;protected]</span></a>
     </div>
     <div class="contact-item">
       <span class="contact-label">LinkedIn</span>
@@ -744,13 +1043,107 @@
   <span class="footer-badge">Available for Projects</span>
 </footer>
 
+
+<script>
+// Hide loader after page loads
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('zoho-loader').classList.add('hide');
+  }, 1500);
+});
+
+// Scroll progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById('progress-bar').style.width = progress + '%';
+});
+
+// Intersection Observer for scroll reveals
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+  observer.observe(el);
+});
+
+// Custom cursor
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  dot.style.left = mouseX + 'px';
+  dot.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.15;
+  ringY += (mouseY - ringY) * 0.15;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// Cursor grow on interactive elements
+document.querySelectorAll('a, button, .exp-company, .domain-card, .skill-tag').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    dot.style.width = '14px'; dot.style.height = '14px';
+    ring.style.width = '50px'; ring.style.height = '50px';
+    ring.style.borderColor = 'rgba(232,82,58,0.7)';
+  });
+  el.addEventListener('mouseleave', () => {
+    dot.style.width = '8px'; dot.style.height = '8px';
+    ring.style.width = '34px'; ring.style.height = '34px';
+    ring.style.borderColor = 'rgba(232,82,58,0.45)';
+  });
+});
+
+// Counter animation for stat numbers
+function animateCounter(el, target, suffix) {
+  let start = 0;
+  const duration = 1800;
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    if (!isNaN(target)) {
+      el.querySelector('.stat-num').childNodes[0].textContent = Math.floor(ease * target);
+    }
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// Trigger counter when hero is visible
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.stat-block').forEach((block, i) => {
+        const numEl = block.querySelector('.stat-num');
+        const text = numEl.childNodes[0].textContent.trim();
+        const num = parseInt(text);
+        if (!isNaN(num)) {
+          setTimeout(() => animateCounter(block, num, '+'), i * 200);
+        }
+      });
+      heroObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+const heroRight = document.querySelector('.hero-right');
+if (heroRight) heroObserver.observe(heroRight);
+</script>
+
 <script>
 function showExp(id) {
-  document.querySelectorAll('.exp-company').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.exp-panel').forEach(el => el.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-  document.getElementById('panel-' + id).classList.add('active');
-}
-</script>
-</body>
-</html>
+  document.querySelectorAll('.exp-company').forEach(el => el.class
